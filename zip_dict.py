@@ -1,0 +1,6 @@
+list1 = [1, 2, 3]
+list2 = ["Im", "You", "They"]
+zipped = list(zip(list1, list2))
+print(zipped)
+dictionary = dict(zipped)
+print(dictionary)
