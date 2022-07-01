@@ -1,5 +1,4 @@
-from datetime import datetime
-
+import time
 
 def decor(func):
     def wrap():
@@ -18,9 +17,10 @@ def decor(func):
 
 def time_check(func):
     def wrap():
-        start = datetime.now()
+        start = time.perf_counter()
         func()
-        print(datetime.now() - start)
+        end = time.perf_counter()
+        print(f'Выполнение функции заняло: {end - start:0.10f} секунд')
 
     return wrap
 
