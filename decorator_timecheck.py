@@ -20,7 +20,7 @@ def time_check(func):
         start = time.perf_counter()
         func()
         end = time.perf_counter()
-        print(f'Выполнение функции заняло: {end - start:0.5f} секунд')
+        print(f'Выполнение функции заняло: {end - start:0.5f} сек.')
 
     return wrap
 
