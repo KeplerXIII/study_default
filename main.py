@@ -1,12 +1,16 @@
-from decorator_timecheck import decor
-from decorator_timecheck import time_check
+# from decorator_timecheck import decor
+# from decorator_timecheck import time_check
+#
+#
+# @time_check
+# @decor
+# def printer():
+#     result = sum(range(0, 100000000))
+#     print(result)
+#
+#
+# printer()
 
-
-@time_check
-@decor
-def printer():
-    result = sum(range(0, 100000000))
-    print(result)
-
-
-printer()
+from netology.homework_lesson_3 import task1
+from netology.homework_lesson_3 import task2
+task2()
