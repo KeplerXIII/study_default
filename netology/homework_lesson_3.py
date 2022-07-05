@@ -1,19 +1,28 @@
 def task1():
+
     boys = ['Peter', 'Alex', 'John', 'Arthur', 'Richard']
     girls = ['Kate', 'Liza', 'Kira', 'Emma', 'Trisha']
-    if len(boys) == len(girls):
+
+    while True:
         boys.sort()
         girls.sort()
-        zipped_pairs = zip(boys, girls)
+        if len(boys) == len(girls):
+            zipped_pairs = zip(boys, girls)
 
-        print("Идеальные пары: ")
-        for boys, girls in zipped_pairs:
-            print(f'{boys} и {girls}')
-    else:
-        if len(boys) > len(girls):
-            print(f'Что бы шансы были равны, нужно добавть женских анкет: {len(boys) - len(girls)} шт.')
+            print("Идеальные пары: ")
+            for boys, girls in zipped_pairs:
+                print(f'{boys} и {girls}')
+            break
         else:
-            print(f'Что бы шансы были равны, нужно добавть мужских анкет: {len(girls) - len(boys)} шт')
+            if len(boys) > len(girls):
+                print(f'Что бы шансы были равны, нужно добавть женских анкет: {len(boys) - len(girls)} шт.')
+                girl_profile = input("Введите имя анкеты: ")
+                girls.append(girl_profile)
+
+            else:
+                print(f'Что бы шансы были равны, нужно добавть мужских анкет: {len(girls) - len(boys)} шт')
+                boy_profile = input("Введите имя анкеты: ")
+                boys.append(boy_profile)
 
 def task2():
     cook_book = [

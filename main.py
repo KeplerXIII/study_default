@@ -13,4 +13,3 @@
 
 from netology.homework_lesson_3 import task1
 from netology.homework_lesson_3 import task2
-task2()
