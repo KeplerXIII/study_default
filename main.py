@@ -10,6 +10,5 @@
 #
 #
 # printer()
-
-from netology.homework_lesson_3 import task1
-from netology.homework_lesson_3 import task2
+# import netology.homework_lesson_3
+# netology.homework_lesson_3.task1()
