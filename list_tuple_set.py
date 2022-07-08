@@ -29,9 +29,26 @@ def list_tuple_set():
     # sorted() - создаёт новый список [], причем возможно применения ключей
     # .sort() - применим только к спискам
     my_files = ['somecat.jpg', 'pc.png', 'apple.bmp', 'mydog.gif']
-    my_files_sorted = sorted(my_files, key=len) # сортировка по длине
+    my_files_sorted = sorted(my_files, key=len)  # сортировка по длине
     print(my_files_sorted)  # ['pc.png', 'apple.bmp', 'mydog.gif', 'somecat.jpg']
 
     my_set = {2, 5, 1, 7, 3}
     my_set_sorted = sorted(my_set, reverse=True)
     print(my_set_sorted)  # [7, 5, 3, 2, 1]
+
+    # Добавляем все элементы второго списка к элементам первого с измением первого списка методом .extend():
+    # Объединение списков
+    a = []
+    b = []
+    a.extend(b)    # a += b эквивалентно a.extend(b)
+    print(a, b)    # [1, 2, 3, 4, 5]  [4, 5]
+
+    # Добавление элемента
+    a.append(b)  # a += [b] эквивалентно a.append(b)
+    print(a, b)  # [1, 2, 3, [4, 5]]  [4, 5]
+
+    # Добавление в словарь
+    dict1 = {'a': 1, 'b': 2}
+    dict2 = {'a': 100, 'c': 3, 'd': 4}
+    dict1.update(dict2)
+    print(dict1)  # {'a': 100, 'c': 3, 'b': 2, 'd': 4}
