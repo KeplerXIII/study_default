@@ -7,7 +7,7 @@ list.sort() #меняем переменную
 print(sorted_list)
 print(list)
 
-# используем лямбду для создания переменной и сортировки по 2 индексу в кортеже
+# используем лямбду для создания переменной и сортировки по 1 индексу в кортеже
 population = {"Shanghai": 24256800, "Karachi": 23500000, "Beijing": 21516000, "Delhi": 16787941}
 # отсортируем по возрастанию населения:
 population_sorted = sorted(population.items(), key=lambda x: x[1])
