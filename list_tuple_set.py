@@ -99,7 +99,7 @@ def list_tuple_set():
     print(next(my_gen))  # -2 - получаем очередной элемент генератора
     print(next(my_gen))  # -1 - получаем очередной элемент генератора
 
-    # Генератор словаря
+    # Переворачиваем словарь
     dict_abc = {'a': 1, 'b': 2, 'c': 3, 'd': 3}
     dict_123 = {v: k for k, v in dict_abc.items()}
     print(dict_123)  # {1: 'a', 2: 'b', 3: 'd'}
@@ -108,5 +108,5 @@ def list_tuple_set():
 
     # Словарь из списка
     list_a = [-2, -1, 0, 1, 2, 3, 4, 5]
-    dict_a = {x: x ** 2 for x in list_a if x > 0}
+    dict_a = {x: x ** 2 for x in list_a}
     print(dict_a)  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16, -2: 4, -1: 1, 5: 25}
