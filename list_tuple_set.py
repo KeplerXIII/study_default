@@ -52,3 +52,61 @@ def list_tuple_set():
     dict2 = {'a': 100, 'c': 3, 'd': 4}
     dict1.update(dict2)
     print(dict1)  # {'a': 100, 'c': 3, 'b': 2, 'd': 4}
+
+    # Обработка списков \ словарей
+    list_a = [-2, -1, 0, 1, 2, 3, 4, 5]
+    list_b = [x for x in list_a if x % 2 == 0 and x > 0]
+    # берем те x, которые одновременно четные и больше нуля
+    print(list_b)  # [2, 4]
+
+    #Например, можем посчитать квадраты значений каждого элемента:
+    list_a = [-2, -1, 0, 1, 2, 3, 4, 5]
+    list_b = [x**2 for x in list_a]
+    print(list_b)   # [4, 1, 0, 1, 4, 9, 16, 25]
+
+    #Или посчитать длины строк c помощью функции len()
+    list_a = ['a', 'abc', 'abcde']
+    list_b = [len(x) for x in list_a]
+    print(list_b)   # [1, 3, 5]
+
+    list_a = [-2, -1, 0, 1, 2, 3, 4, 5]
+    list_b = [x if x < 0 else x ** 2 for x in list_a]
+    # Если x-отрицательное - берем x, в остальных случаях - берем квадрат x
+    print(list_b)  # [-2, -1, 0, 1, 4, 9, 16, 25]
+
+    # Улучшаем читаемость
+    numbers = range(10)
+    # Before
+    squared_evens = [n ** 2 for n in numbers if n % 2 == 0]
+    # After
+    squared_evens = [
+        n ** 2
+        for n in numbers
+        if n % 2 == 0
+    ]
+    print(squared_evens)
+
+    # Старый метод через лямбду
+    numbers = range(10)
+    squared_evens = map(lambda n: n ** 2, filter(lambda n: n % 2 == 0, numbers))
+    print(squared_evens)  # <map object at 0x7f661e5dba20>
+    print(list(squared_evens))  # [0, 4, 16, 36, 64]
+
+    # Выражение-генератор - выдаёт по одному значению, пишется в круглых скобках, в то время как простой генератор
+    # обозначается квадратными скобками, что логично, т.к. на выходе мы получаем список
+    list_a = [-2, -1, 0, 1, 2, 3, 4, 5]
+    my_gen = (i for i in list_a)  # выражение-генератор
+    print(next(my_gen))  # -2 - получаем очередной элемент генератора
+    print(next(my_gen))  # -1 - получаем очередной элемент генератора
+
+    # Генератор словаря
+    dict_abc = {'a': 1, 'b': 2, 'c': 3, 'd': 3}
+    dict_123 = {v: k for k, v in dict_abc.items()}
+    print(dict_123)  # {1: 'a', 2: 'b', 3: 'd'}
+    # Обратите внимание, мы потеряли "с"! Так как значения были одинаковы,
+    # то когда они стали ключами, только последнее значение сохранилось.
+
+    # Словарь из списка
+    list_a = [-2, -1, 0, 1, 2, 3, 4, 5]
+    dict_a = {x: x ** 2 for x in list_a if x > 0}
+    print(dict_a)  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16, -2: 4, -1: 1, 5: 25}
