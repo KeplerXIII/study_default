@@ -62,6 +62,7 @@ def task_4():
     stats_rev = {v: k for k, v in stats.items()}
     pprint(stats_rev[best_company])
 
+
 def task_5(list):
     if len(list) <= 1:
         return list[0]
