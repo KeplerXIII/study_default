@@ -66,10 +66,15 @@ def task_3():
 
 
 def task_4():
+    # stats = {'facebook': 55, 'yandex': 120, 'vk': 115, 'google': 99, 'email': 42, 'ok': 98}
+    # best_company = max(list(stats.values()))
+    # stats_rev = {v: k for k, v in stats.items()}
+    # pprint(stats_rev[best_company])
+    #
+    # Более рациональное решение от куратора сортируем по ключу.
     stats = {'facebook': 55, 'yandex': 120, 'vk': 115, 'google': 99, 'email': 42, 'ok': 98}
-    best_company = max(list(stats.values()))
-    stats_rev = {v: k for k, v in stats.items()}
-    pprint(stats_rev[best_company])
+    best_company = max(stats, key=stats.get)
+    pprint(best_company)
 
 
 def task_5(list):
