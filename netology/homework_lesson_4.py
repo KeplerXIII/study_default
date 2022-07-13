@@ -17,14 +17,23 @@ def task_1():
 
     check_country = "Россия"
 
-    geo_logs_temp = []
-    for dict in geo_logs:
-        for values in dict.values():
-            if check_country in values:
-                geo_logs_temp.append(dict)
-    geo_logs = geo_logs_temp
-    pprint(geo_logs)
-    return geo_logs
+    # Моё решение, менее рациональное
+    # geo_logs_temp = []
+    # for dict in geo_logs:
+    #     for values in dict.values():
+    #         if check_country in values:
+    #             geo_logs_temp.append(dict)
+    # geo_logs = geo_logs_temp
+    # pprint(geo_logs)
+    # return geo_logs
+
+    # Подсказка куратора, .values возвращает список, поэтому у меня не получалось, надо было взять
+    # элемент из списка списков и проверять по нему.
+    result_list = []
+    for visit in geo_logs:
+        if check_country in list(visit.values())[0]:
+            result_list.append(visit)
+    pprint(result_list)
 
 
 def task_2():
@@ -66,4 +75,4 @@ def task_4():
 def task_5(list):
     if len(list) <= 1:
         return list[0]
-    return {list[0]: total_dict(list[1:])}
+    return {list[0]: task_5(list[1:])}
