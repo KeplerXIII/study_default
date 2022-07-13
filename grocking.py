@@ -42,3 +42,15 @@ def check_dict():
     voted = {}
     value = voted.get("tom")
     print(value)
+
+
+# Очередь
+
+from collections import deque
+
+
+def queue():
+    search_queue = deque()
+    search_queue += [2, 3, 4]
+    print(search_queue.popleft())
+    print(search_queue.popleft())
