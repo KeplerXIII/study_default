@@ -54,3 +54,40 @@ def queue():
     search_queue += [2, 3, 4]
     print(search_queue.popleft())
     print(search_queue.popleft())
+
+
+graph = {}
+graph ["you"] = [ "alice", "bob", "claire"]
+graph["bob"] = ["anuj", "peggy"]
+graph["alice"] = ["peggy"]
+graph["claire"] = ["thom", "jonny"]
+graph["anuj"] = []
+graph["peggy"] = []
+graph["thom"] = []
+graph["jonny"] = []
+
+
+def person_is_seller(person):
+    if person == "you":
+        return True
+    return False
+
+
+
+def search(name):
+    search_queue = deque()
+    search_queue += graph[name]
+    searched = []
+    while search_queue:
+        person = search_queue.popleft()
+        if not person in searched:
+            if person_is_seller(person):
+                print(person +" is а mango seller!")
+                return True
+            else:
+                search_queue += graph[person]
+                searched.append(person)
+    print("Not in search")
+    return False
+
+    search("you")
