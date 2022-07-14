@@ -1,3 +1,6 @@
+from pprint import pprint
+
+
 documents = [
     {"type": "passport", "number": "2207 876234", "name": "Василий Гупкин"},
     {"type": "invoice", "number": "11-2", "name": "Геннадий Покемонов"},
@@ -109,7 +112,6 @@ def doc_controller():
         elif command == 'a' or command == 'add':
             offset()
             shelf = input("Введите номер полки для хранения: ")
-            shelf_checker(shelf)
             number = input("Введите номер документа для добавления: ")
             type = input("Введите тип документа: ")
             name = input("Введите имя: ")
@@ -135,6 +137,9 @@ def doc_controller():
             number = input("Введите номер полки для добавления: ")
             print(add_shelf(number))
             offset()
+        elif command == 'check':
+            pprint(documents)
+            pprint(directories)
         elif command == "q" or command == 'quit':
             offset()
             print("Работа завершена. Спасибо за пользование doc_controller.")
@@ -147,3 +152,46 @@ def doc_controller():
 
 
 doc_controller()
+
+# По какой то причине switch-case не работает на Replit (в Pycharm работает)
+# Изначально был вариант ниже, буду признателен если разъясните, почему не 
+# работает конструкция ниже и вообще благодарен за любые советы. Спасибо!
+
+# def doc_controller():
+#     print(commands)
+#     while True:
+#         command = input("Введите команду: ")
+#         match command:
+#             case 'p':
+#                 number = input("Введите номер документа для поиска имени: ")
+#                 print(name_search(number))
+#             case 's':
+#                 number = input("Введите номер документа для поиска полки: ")
+#                 print(shelf_search(number))
+#             case 'l':
+#                 list_documents()
+#             case 'a':
+#                 shelf = input("Введите номер полки для хранения: ")
+#                 number = input("Введите номер документа для добавления: ")
+#                 type = input("Введите тип документа: ")
+#                 name = input("Введите имя: ")
+#                 print(add_profile(shelf, number, type, name))
+#             case 'h':
+#                 print(commands)
+#             case 'd':
+#                 number = input("Введите номер документа для удаления: ")
+#                 print(delete(number))
+#             case 'm':
+#                 number = input("Введите номер документа для перемещения: ")
+#                 finish_shelf = input("Введите номер полки для перемещения: ")
+#                 print(move(number, finish_shelf))
+#             case 'as':
+#                 number = input("Введите номер полки для добавления: ")
+#                 print(add_shelf(number))
+#             case "q":
+#                 print("Работа завершена. Спасибо за пользование doc_controller.")
+#                 return
+#             case _:
+#                 print("Введена недопустимая команда, повторите ввод.")
+
+# doc_controller
