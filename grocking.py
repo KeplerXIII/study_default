@@ -56,8 +56,12 @@ def queue():
     print(search_queue.popleft())
 
 
+# Принцип графов, среди имён пользователя ищем ближайшего который проходит проверку person_is_seller(person)
+# В поиск передаём ключ словаря, значениями которых являются его друзья например, ищем ближайшего чьё имя начинается
+# на "t" в данном примере, для практики добавил ключ по которому ищем для примера
+
 graph = {}
-graph ["you"] = [ "alice", "bob", "claire"]
+graph["you"] = ["alice", "bob", "claire"]
 graph["bob"] = ["anuj", "peggy"]
 graph["alice"] = ["peggy"]
 graph["claire"] = ["thom", "jonny"]
@@ -67,22 +71,21 @@ graph["thom"] = []
 graph["jonny"] = []
 
 
-def person_is_seller(person):
-    if person == "you":
+def person_is_seller(person, key):
+    if person[0] == key:
         return True
     return False
 
 
-
-def search(name):
+def search(name, key=""):
     search_queue = deque()
     search_queue += graph[name]
     searched = []
     while search_queue:
         person = search_queue.popleft()
         if not person in searched:
-            if person_is_seller(person):
-                print(person +" is а mango seller!")
+            if person_is_seller(person, key):
+                print(person + " is а mango seller!")
                 return True
             else:
                 search_queue += graph[person]
@@ -90,4 +93,5 @@ def search(name):
     print("Not in search")
     return False
 
-    search("you")
+
+search("you")
