@@ -76,7 +76,6 @@ def move(number, finish_shelf):
 def add_shelf(number):
     if number not in list(directories.keys()):
         directories[number] = []
-        print(directories)
         return f'Полка {number} добавлена.'
     return f'Полка {number} уже существует.'
 
@@ -91,7 +90,7 @@ def doc_controller():
                 print(name_search(number))
             case 's':
                 number = input("Введите номер документа для поиска полки: ")
-                print(shelf_search(number))
+                print(f'Документ на полке {shelf_search(number)}')
             case 'l':
                 list_documents()
             case 'a':
