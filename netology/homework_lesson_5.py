@@ -150,14 +150,13 @@ commands_dict = {
 def doc_controller():
     print(greeting)
     print(commands)
-    check = True
-    while check:
+    while True:
         command = input("Введите команду: ").lower()
         if command in list(commands_dict.keys()):
             commands_dict[command]()
         elif command == "q":
             print("Работа завершена. Спасибо за использование doc_controller.")
-            check = False
+            return
         else:
             print("Введена недопустимая команда, повторите ввод.")
 
