@@ -19,7 +19,8 @@ profile_error = "Профайл не найден"
 
 greeting = '''
 Добро пожаловть в doc_controller, с помощью этой программы вы можете добавлять документы в базу, 
-сортировать их по полкам, а так же перемещать их. Для начала работы ознакомьтесь с возможностями.'''
+сортировать их по полкам, а так же перемещать их. Для начала работы ознакомьтесь с возможностями.
+'''
 
 commands = '''
 p – people – команда, которая спросит номер документа и выведет имя человека, которому он принадлежит.
@@ -49,6 +50,7 @@ def name_search():
     for profile in documents:
         if profile["number"] == number:
             print(f'По запрошенному номеру документа в базе найден:{profile["name"]}')
+            return
     print(error_message)
 
 
@@ -58,6 +60,7 @@ def shelf_search():
     for shelf in directories:
         if number in directories[shelf]:
             print(f'Документ на полке: {shelf}')
+            return
     print(error_message)
 
 
@@ -91,6 +94,7 @@ def delete():
         if number in directories[shelf]:
             directories[shelf].remove(number)
             print("Профайл удалён.")
+            return
     print(profile_error)
 
 
@@ -105,6 +109,7 @@ def move():
             directories[shelf].remove(number)
             directories[finish_shelf] += [number]
             print(f"Документ перемещен на полку {finish_shelf}")
+            return
     print(f'Профайл не найден')
 
 
@@ -114,12 +119,8 @@ def add_shelf():
     if number not in list(directories.keys()):
         directories[number] = []
         print(f'Полка {number} добавлена.')
+        return
     print(f'Полка {number} уже существует.')
-
-
-@decor
-def offset():
-    print("----------------")
 
 
 @decor
@@ -149,13 +150,14 @@ commands_dict = {
 def doc_controller():
     print(greeting)
     print(commands)
-    while True:
+    check = True
+    while check:
         command = input("Введите команду: ").lower()
         if command in list(commands_dict.keys()):
             commands_dict[command]()
         elif command == "q":
             print("Работа завершена. Спасибо за использование doc_controller.")
-            return
+            check = False
         else:
             print("Введена недопустимая команда, повторите ввод.")
 
