@@ -31,6 +31,7 @@ as – add shelf – добавляем новую полку.
 '''
 
 
+
 def name_search(number):
     for profile in documents:
         if profile["number"] == number:
