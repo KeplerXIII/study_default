@@ -1,6 +1,5 @@
 from pprint import pprint
 
-
 documents = [
     {"type": "passport", "number": "2207 876234", "name": "Василий Гупкин"},
     {"type": "invoice", "number": "11-2", "name": "Геннадий Покемонов"},
@@ -18,6 +17,11 @@ error_message = "Такого номера нет в списке докумен
 shelf_error = f"Полки не существует, для добавления доступны {shelf_range}"
 profile_error = "Профайл не найден"
 
+greeting = '''
+Добро пожаловть в doc_controller, с помощью этой программы вы можете добавлять документы в базу, 
+сортировать их по полкам, а так же перемещать их. Для начала работы ознакомьтесь с возможностями.
+'''
+
 commands = '''
 p – people – команда, которая спросит номер документа и выведет имя человека, которому он принадлежит.
 s – shelf – команда, которая спросит номер документа и выведет номер полки, на которой он находится.
@@ -31,168 +35,130 @@ as – add shelf – добавляем новую полку.
 '''
 
 
+def decor(func):
+    def wrap():
+        print("============")
+        func()
+        print("============")
 
-def name_search(number):
+    return wrap
+
+
+@decor
+def name_search():
+    number = input("Введите номер документа для поиска имени: ")
     for profile in documents:
         if profile["number"] == number:
-            return f'По запрошенному номеру документа в базе найден:{profile["name"]}'
-    return error_message
+            print(f'По запрошенному номеру документа в базе найден:{profile["name"]}')
+            return
+    print(error_message)
 
 
-def shelf_search(number):
+@decor
+def shelf_search():
+    number = input("Введите номер документа для поиска полки: ")
     for shelf in directories:
         if number in directories[shelf]:
-            return f'Документ на полке: {shelf}'
-    return error_message
+            print(f'Документ на полке: {shelf}')
+            return
+    print(error_message)
 
 
+@decor
 def list_documents():
     for profile in documents:
         print(f"{profile['type']}, {profile['number']}, {profile['name']}")
 
 
-def add_profile(shelf, number, type, name):
+@decor
+def add_profile():
+    shelf = input("Введите номер полки для хранения: ")
     if shelf not in list(directories.keys()):
-        return shelf_error
+        print(shelf_error)
+        return
+    number = input("Введите номер документа для добавления: ")
+    type = input("Введите тип документа: ")
+    name = input("Введите имя: ")
     documents.append({'type': type, 'number': number, 'name': name})
     directories[shelf] += [number]
-    return f"Документ добавлен на {shelf} полку."
+    print(f"Документ добавлен на {shelf} полку.")
 
 
-def delete(number):
+@decor
+def delete():
+    number = input("Введите номер документа для удаления: ")
     for profile in documents:
         if profile['number'] == number:
             documents.remove(profile)
     for shelf in directories:
         if number in directories[shelf]:
             directories[shelf].remove(number)
-            return "Профайл удалён."
-    return profile_error
+            print("Профайл удалён.")
+            return
+    print(profile_error)
 
 
-def move(number, finish_shelf):
+@decor
+def move():
+    number = input("Введите номер документа для перемещения: ")
+    finish_shelf = input("Введите номер полки для перемещения: ")
     if finish_shelf not in list(directories.keys()):
         return shelf_error
     for shelf in directories:
         if number in directories[shelf]:
             directories[shelf].remove(number)
             directories[finish_shelf] += [number]
-            return f"Документ перемещен на полку {finish_shelf}"
-    return f'Профайл не найден'
+            print(f"Документ перемещен на полку {finish_shelf}")
+            return
+    print(f'Профайл не найден')
 
 
-def add_shelf(number):
+@decor
+def add_shelf():
+    number = input("Введите номер полки для добавления: ")
     if number not in list(directories.keys()):
         directories[number] = []
-        return f'Полка {number} добавлена.'
-    return f'Полка {number} уже существует.'
+        print(f'Полка {number} добавлена.')
+        return
+    print(f'Полка {number} уже существует.')
 
 
-def offset():
-    print("----------------")
+@decor
+def check():
+    pprint(documents)
+    pprint(directories)
+
+
+@decor
+def help():
+    print(commands)
+
+
+commands_dict = {
+    "p": name_search,
+    "s": shelf_search,
+    'l': list_documents,
+    'a': add_profile,
+    'd': delete,
+    'm': move,
+    'h': help,
+    'as': add_shelf,
+    'check': check
+}
 
 
 def doc_controller():
+    print(greeting)
     print(commands)
     while True:
         command = input("Введите команду: ").lower()
-        if command == 'p' or command == 'people':
-            offset()
-            number = input("Введите номер документа для поиска имени: ")
-            print(name_search(number))
-            offset()
-        elif command == 's' or command == 'shelf':
-            offset()
-            number = input("Введите номер документа для поиска полки: ")
-            print(shelf_search(number))
-            offset()
-        elif command == 'l' or command == 'list':
-            offset()
-            list_documents()
-            offset()
-        elif command == 'a' or command == 'add':
-            offset()
-            shelf = input("Введите номер полки для хранения: ")
-            number = input("Введите номер документа для добавления: ")
-            type = input("Введите тип документа: ")
-            name = input("Введите имя: ")
-            print(add_profile(shelf, number, type, name))
-            offset()
-        elif command == 'h' or command == 'help':
-            offset()
-            print(commands)
-            offset()
-        elif command == 'd' or command == 'delete':
-            offset()
-            number = input("Введите номер документа для удаления: ")
-            print(delete(number))
-            offset()
-        elif command == 'm' or command == 'move':
-            offset()
-            number = input("Введите номер документа для перемещения: ")
-            finish_shelf = input("Введите номер полки для перемещения: ")
-            print(move(number, finish_shelf))
-            offset()
-        elif command == 'as' or command == 'add shelf':
-            offset()
-            number = input("Введите номер полки для добавления: ")
-            print(add_shelf(number))
-            offset()
-        elif command == 'check':
-            pprint(documents)
-            pprint(directories)
-        elif command == "q" or command == 'quit':
-            offset()
-            print("Работа завершена. Спасибо за пользование doc_controller.")
-            offset()
+        if command in list(commands_dict.keys()):
+            commands_dict[command]()
+        elif command == "q":
+            print("Работа завершена. Спасибо за использование doc_controller.")
             return
         else:
-            offset()
             print("Введена недопустимая команда, повторите ввод.")
-            offset()
 
 
 doc_controller()
-
-# По какой то причине switch-case не работает на Replit (в Pycharm работает)
-# Изначально был вариант ниже, буду признателен если разъясните, почему не 
-# работает конструкция ниже и вообще благодарен за любые советы. Спасибо!
-
-# def doc_controller():
-#     print(commands)
-#     while True:
-#         command = input("Введите команду: ")
-#         match command:
-#             case 'p':
-#                 number = input("Введите номер документа для поиска имени: ")
-#                 print(name_search(number))
-#             case 's':
-#                 number = input("Введите номер документа для поиска полки: ")
-#                 print(shelf_search(number))
-#             case 'l':
-#                 list_documents()
-#             case 'a':
-#                 shelf = input("Введите номер полки для хранения: ")
-#                 number = input("Введите номер документа для добавления: ")
-#                 type = input("Введите тип документа: ")
-#                 name = input("Введите имя: ")
-#                 print(add_profile(shelf, number, type, name))
-#             case 'h':
-#                 print(commands)
-#             case 'd':
-#                 number = input("Введите номер документа для удаления: ")
-#                 print(delete(number))
-#             case 'm':
-#                 number = input("Введите номер документа для перемещения: ")
-#                 finish_shelf = input("Введите номер полки для перемещения: ")
-#                 print(move(number, finish_shelf))
-#             case 'as':
-#                 number = input("Введите номер полки для добавления: ")
-#                 print(add_shelf(number))
-#             case "q":
-#                 print("Работа завершена. Спасибо за пользование doc_controller.")
-#                 return
-#             case _:
-#                 print("Введена недопустимая команда, повторите ввод.")
-
-# doc_controller
