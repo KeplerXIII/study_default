@@ -131,8 +131,9 @@ print(lector_serg, "\n")
 print(lector_pavel, "\n")
 print(reviewer_alex, "\n")
 print(reviewer_platon, "\n")
-print(student_vasiliy > student_petr)
-print(lector_serg > lector_pavel)
 
-print(avg_course_grade([student_petr, student_vasiliy], 'Python'))
-print(avg_lecture_grade([lector_pavel, lector_serg], 'Python'))
+print("Успеваемость Василия лучше чем Петра:", student_vasiliy > student_petr)
+print("Рейтинг лектора Сергея выше Павла:", lector_serg > lector_pavel)
+
+print("Средняя оценка успеваемости по курсу 'Python'", avg_course_grade([student_petr, student_vasiliy], 'Python'))
+print("Средний рейтинг лекторов по курсу 'Python'", avg_lecture_grade([lector_pavel, lector_serg], 'Python'))
