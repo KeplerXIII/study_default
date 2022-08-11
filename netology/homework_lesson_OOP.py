@@ -77,13 +77,62 @@ def avg_grade(self):
     else:
         return ""
 
+def avg_course_grade(students, course):
+    result = []
+    for student in students:
+        if isinstance(student, Student) and course in student.courses_in_progress:
+            result += student.grades[course]
+        else:
+            pass
+    result = (int(x) for x in result)
+    return round(mean(result), 1)
+
+def avg_lecture_grade(lectures, course):
+    result = []
+    for lecture in lectures:
+        if isinstance(lecture, Lecture) and course in lecture.courses_attached:
+            result += lecture.grades[course]
+        else:
+            pass
+    result = (int(x) for x in result)
+    return round(mean(result), 1)
+
+
 reviewer_alex = Reviewer("Alexey", "Zazulya")
+reviewer_alex.courses_attached = ['Python', 'JavaScript']
 reviewer_platon = Reviewer("Platon", "Markov")
+reviewer_platon.courses_attached = ['Python', 'HTML']
+
 lector_serg = Lecture("Sergey", "Nazarov")
+lector_serg.courses_attached = ['Python', 'JavaScript']
 lector_pavel = Lecture("Pavel", "Beliy")
+lector_pavel.courses_attached = ['Python', 'HTML']
+
 student_vasiliy = Student("Vasiliy", "Gordeev", "m")
+student_vasiliy.courses_in_progress = ['Python', 'JavaScript']
+student_vasiliy.finished_courses = ['Git', 'CSS']
 student_petr = Student("Petr", "Goncharov", "m")
+student_petr.courses_in_progress = ['Python', 'HTML']
+student_petr.finished_courses = ['Git', 'SQL']
+
+student_vasiliy.rate_lecture(lector_pavel, 'Python', '9')
+student_vasiliy.rate_lecture(lector_serg, 'JavaScript', '9')
+student_petr.rate_lecture(lector_serg, 'Python', '9')
+student_petr.rate_lecture(lector_pavel, 'HTML', '7')
+
+reviewer_alex.rate_hw(student_vasiliy, 'Python', '8')
+reviewer_alex.rate_hw(student_vasiliy, 'JavaScript', '7')
+reviewer_platon.rate_hw(student_petr, 'Python', '9')
+reviewer_platon.rate_hw(student_petr, 'HTML', '6')
 
 print(student_vasiliy, "\n")
+print(student_petr, "\n")
 print(lector_serg, "\n")
+print(lector_pavel, "\n")
 print(reviewer_alex, "\n")
+print(reviewer_platon, "\n")
+print(student_vasiliy > student_petr)
+print(lector_serg > lector_pavel)
+
+print(avg_course_grade([student_petr, student_vasiliy], 'Python'))
+print(avg_lecture_grade([lector_pavel, lector_serg], 'Python'))
