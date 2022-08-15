@@ -19,6 +19,7 @@ def cook_book():
 
 
 cook_book = cook_book()
+pprint(cook_book)
 
 
 test = {'Молоко': {'measure': 'мл', 'quantity': 300},
@@ -39,5 +40,5 @@ def get_shop_list_by_dishes(dishes, person_count):
 
 
 
-pprint(get_shop_list_by_dishes(['Омлет', 'Запеченный картофель'], 3))
+pprint(get_shop_list_by_dishes(['Омлет', 'Глазунья'], 3))
 
