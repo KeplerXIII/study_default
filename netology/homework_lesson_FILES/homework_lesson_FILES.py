@@ -19,7 +19,6 @@ def cook_book():
 
 
 cook_book = cook_book()
-pprint(cook_book)
 
 
 test = {'Молоко': {'measure': 'мл', 'quantity': 300},
