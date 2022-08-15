@@ -20,24 +20,19 @@ def cook_book():
 
 cook_book = cook_book()
 
-
-test = {'Молоко': {'measure': 'мл', 'quantity': 300},
-       'Помидор': {'measure': 'шт', 'quantity': 6},
-       'Яйцо': {'measure': 'шт.', 'quantity': 6}}
-
-
 def get_shop_list_by_dishes(dishes, person_count):
     result = {}
     for dish in dishes:
-        for ingredient in cook_book[dish]:
-            if ingredient["ingredient_name"] not in result:
-                result[ingredient["ingredient_name"]] = {'measure': ingredient["measure"], 'quantity': ingredient['quantity'] * person_count}
-            else:
-                result[ingredient["ingredient_name"]]['quantity'] = result[ingredient["ingredient_name"]]['quantity'] + ingredient['quantity'] * person_count
+        if dish in cook_book:
+            for ingredient in cook_book[dish]:
+                if ingredient["ingredient_name"] not in result:
+                    result[ingredient["ingredient_name"]] = {'measure': ingredient["measure"], 'quantity': ingredient['quantity'] * person_count}
+                else:
+                    result[ingredient["ingredient_name"]]['quantity'] = result[ingredient["ingredient_name"]]['quantity'] + ingredient['quantity'] * person_count
+        else:
+            print(f"Блюда {dish} нет в книге рецептов.")
     return result
 
 
-
-
-pprint(get_shop_list_by_dishes(['Омлет', 'Глазунья'], 3))
+pprint(get_shop_list_by_dishes(['Омлет', 'Глазунья', 'Торт'], 3))
 
