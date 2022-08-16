@@ -1,7 +1,7 @@
 from pprint import pprint
 
 
-def cook_book_interpritator(recipes_file):
+def cook_book_generator(recipes_file):
     with open(recipes_file, encoding="utf-8") as file:
 
         book = {}
@@ -54,6 +54,6 @@ def text_combiner(file1, file2, file3):
         file_4.write("".join(text_list[0]) + "\n" + "".join(text_list[1]) + "\n" + "".join(text_list[2]))
 
 
-cook_book = cook_book_interpritator("recipes.txt")
+cook_book = cook_book_generator("recipes.txt")
 pprint(get_shop_list_by_dishes(['Омлет', 'Глазунья', 'Торт'], 3))
 text_combiner("3.txt", "1.txt", "2.txt")
