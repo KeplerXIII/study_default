@@ -41,7 +41,7 @@ def get_shop_list_by_dishes(dishes, person_count):
 
 def text_combiner(file1, file2, file3):
     temp = [file1, file2, file3]
-    text_list =[]
+    text_list = []
     for file in temp:
         with open(file, encoding="utf-8") as f:
             f_list = f.readlines()
