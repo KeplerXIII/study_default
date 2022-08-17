@@ -39,10 +39,9 @@ def get_shop_list_by_dishes(dishes, person_count):
     return result
 
 
-def text_combiner(file1, file2, file3):
-    temp = [file1, file2, file3]
+def text_combiner(*args):
     text_list = []
-    for file in temp:
+    for file in args:
         with open(file, encoding="utf-8") as f:
             f_list = f.readlines()
             f_len = str(len(f_list))
@@ -50,7 +49,7 @@ def text_combiner(file1, file2, file3):
             f_list.insert(0, file + "\n")
             text_list.append(f_list)
     text_list.sort(key=len)
-    with open("4.txt", "w", encoding='utf-8') as file_4:
+    with open("result.txt", "w", encoding='utf-8') as file_4:
         file_4.write("".join(text_list[0]) + "\n" + "".join(text_list[1]) + "\n" + "".join(text_list[2]))
 
 
