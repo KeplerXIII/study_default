@@ -11,4 +11,4 @@ def most_intellegence(compare_list):
 
     print(f'Самый умный тут у нас - мистер {max(compare_dict, key=compare_dict.get)}')
 
-most_intellegence(["Hulk", "Captain America", "Thanos"])
+# most_intellegence(["Hulk", "Captain America", "Thanos"])
