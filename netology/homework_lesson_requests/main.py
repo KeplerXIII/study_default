@@ -1,23 +1,20 @@
-from pprint import pprint
-
-import requests
-
-from reddit import Reddit
 from ya_disk import YandexDisk
+from overflow import Overflow
+from user import _token
+from most_intelligence import most_intellegence
 
-TOKEN = ""
-
-
-def test_request():
-    url = "https://bootssizes/get"
-    params = {"model": "nike123"}
-    headers = {"Authorization": "secret - token - 123"}
-    response = requests.get(url, params=params, headers=headers, timeout=5)
-    pprint(response)
-
+TOKEN = _token
 
 if __name__ == '__main__':
-    reddit = Reddit()
-    pprint(reddit.get_popular_videos())
-    ya = YandexDisk(token="")
-    ya.upload_file_to_disk("test/netology", "test.txt")
+    ya = YandexDisk(token=_token)
+    ya.upload_file_to_disk("test/test.txt", "test.txt")
+
+    print("\n\n")
+
+    over = Overflow()
+    over.two_days_question()
+
+    print("\n\n")
+
+    heroes = ["Thanos", "Captain America", "Hulk"]
+    most_intellegence(heroes)
