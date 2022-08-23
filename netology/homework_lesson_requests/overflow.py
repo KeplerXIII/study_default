@@ -4,6 +4,10 @@ from datetime import datetime
 
 class Overflow:
 
+    def __init__(self):
+        self.i = None
+        self.page = None
+
     def two_days_question(self, page=1, i=0):
         url = "https://api.stackexchange.com/2.3/questions"
         date = str(round(time.time()) - 172800)
