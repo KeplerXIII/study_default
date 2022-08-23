@@ -25,7 +25,7 @@ class Overflow:
         response = requests.get(url, params=params)
         response = response.json()
         has_more = response['has_more']
-        page += 1
+
         for item in response["items"]:
             i += 1
             print(datetime.fromtimestamp(item["creation_date"]).strftime("%A, %B %d, %Y %I:%M:%S"),
